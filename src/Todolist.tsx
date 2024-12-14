@@ -6,13 +6,15 @@ type PropsType = {
     title: string
     tasks: TaskType[]
     filter: FilterValuesType
-    changeFilter: (filter: FilterValuesType) => void
-    addTask: (title: string) => void
-    removeTask: (taskId: string) => void
-	changeTaskStatus: (taskId: string, isDone: boolean) => void
+    changeFilter: (filter: FilterValuesType, todolistId: string) => void
+    addTask: (title: string, todolistId: string) => void
+    removeTask: (taskId: string, todolistId: string) => void
+	changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
+    todolistId: string
+    removeTodolist:(todolistId: string)=>void
 }
 
-export const Todolist = ({title, tasks, filter, changeFilter, addTask, removeTask, changeTaskStatus}: PropsType) => {
+export const Todolist = ({title, tasks, filter, changeFilter, addTask, removeTask, changeTaskStatus, todolistId, removeTodolist}: PropsType) => {
     let [inputTitle, setInputTitle] = useState('')
     let [error, setError] = useState<null | string>(null)
 
@@ -31,7 +33,7 @@ export const Todolist = ({title, tasks, filter, changeFilter, addTask, removeTas
 
     const onClickButtonHandler = () => {
         if (inputTitle.trim() !== '') {
-            addTask(inputTitle.trim())
+            addTask(inputTitle.trim(), todolistId)
         } else {
             setError('Title is required')
         }
@@ -39,12 +41,16 @@ export const Todolist = ({title, tasks, filter, changeFilter, addTask, removeTas
     }
 
     const changeFilterTasksHandler = (filter: FilterValuesType) => {
-        changeFilter(filter)
+        changeFilter(filter, todolistId)
+    }
+
+    const removeTodolistHandler = () => {
+        removeTodolist(todolistId)
     }
 
     return (
         <div>
-            <h3>{title}</h3>
+            <h3>{title}<Button onClick={removeTodolistHandler} title={'x'}/></h3>
             <input
                 onKeyDown={(event) => onKeyDownHandler(event)} className={error ? 'error' : ''}
                 value={inputTitle}
@@ -58,11 +64,11 @@ export const Todolist = ({title, tasks, filter, changeFilter, addTask, removeTas
                     : <ul>
                         {tasks.map((task) => {
                             const onClickRemoveTask = () => {
-                                removeTask(task.id)
+                                removeTask(task.id, todolistId)
                             }
 
                             const onChangeTaskStatus = (event: ChangeEvent<HTMLInputElement>) => {
-                                changeTaskStatus(task.id, event.currentTarget.checked)
+                                changeTaskStatus(task.id, event.currentTarget.checked, todolistId)
                             }
 
                             return <li key={task.id}>
