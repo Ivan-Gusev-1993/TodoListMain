@@ -77,3 +77,13 @@ export const Todolist = (props: TodolistPropsType) => {
     )
 }
 
+type EditableSpanPropsType = {
+    title: string
+    isDone: boolean
+}
+function (props: EditableSpanPropsType){
+    return(
+        <span className={props.isDone ? 'is-done' : ''}>{props.title}</span>
+    )
+}
+
