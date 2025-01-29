@@ -16,7 +16,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import {containerSx} from './TodolistItem.styles'
 import {NavButton} from './NavButton'
 
-export type Todolist = {
+export type TodolistType = {
   id: string
   title: string
   filter: FilterValues
@@ -38,7 +38,7 @@ export const App = () => {
   const todolistId1 = v1()
   const todolistId2 = v1()
 
-  const [todolists, setTodolists] = useState<Todolist[]>([
+  const [todolists, setTodolists] = useState<TodolistType[]>([
     {id: todolistId1, title: 'What to learn', filter: 'all'},
     {id: todolistId2, title: 'What to buy', filter: 'all'},
   ])
@@ -76,7 +76,7 @@ export const App = () => {
 
   const createTodolist = (title: string) => {
     const todolistId = v1()
-    const newTodolist: Todolist = {id: todolistId, title, filter: 'all'}
+    const newTodolist: TodolistType = {id: todolistId, title, filter: 'all'}
     setTodolists([newTodolist, ...todolists])
     setTasks({...tasks, [todolistId]: []})
   }
