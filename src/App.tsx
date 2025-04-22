@@ -35,21 +35,21 @@ export type TasksState = Record<string, Task[]>
 type ThemeMode = 'dark' | 'light'
 
 export const App = () => {
-  const todolistId1 = v1()
-  const todolistId2 = v1()
+  const todolistId01 = v1()
+  const todolistId02 = v1()
 
   const [todolists, setTodolists] = useState<TodolistType[]>([
-    {id: todolistId1, title: 'What to learn', filter: 'all'},
-    {id: todolistId2, title: 'What to buy', filter: 'all'},
+    {id: todolistId01, title: 'What to learn', filter: 'all'},
+    {id: todolistId02, title: 'What to buy', filter: 'all'},
   ])
 
   const [tasks, setTasks] = useState<TasksState>({
-    [todolistId1]: [
+    [todolistId01]: [
       {id: v1(), title: 'HTML&CSS', isDone: true},
       {id: v1(), title: 'JS', isDone: true},
       {id: v1(), title: 'ReactJS', isDone: false},
     ],
-    [todolistId2]: [
+    [todolistId02]: [
       {id: v1(), title: 'Rest API', isDone: true},
       {id: v1(), title: 'GraphQL', isDone: false},
     ],
