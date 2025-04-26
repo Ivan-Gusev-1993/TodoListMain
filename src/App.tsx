@@ -36,7 +36,6 @@ export type TasksState = Record<string, Task[]>
 type ThemeMode = 'dark' | 'light'
 
 export const App = () => {
-  console.log('app rendered')
   const todolistId1 = v1()
   const todolistId2 = v1()
 
