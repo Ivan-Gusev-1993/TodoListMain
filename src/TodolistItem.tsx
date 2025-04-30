@@ -1,5 +1,5 @@
 import type {ChangeEvent} from 'react'
-import type {FilterValues, Task, TodolistType} from './App'
+import type {FilterValues, Task, Todolist} from './App'
 import {CreateItemForm} from './CreateItemForm'
 import {EditableSpan} from './EditableSpan'
 import Checkbox from '@mui/material/Checkbox'
@@ -12,7 +12,7 @@ import ListItem from '@mui/material/ListItem'
 import {containerSx, getListItemSx} from './TodolistItem.styles'
 
 type Props = {
-  todolist: TodolistType
+  todolist: Todolist
   tasks: Task[]
   deleteTask: (todolistId: string, taskId: string) => void
   changeFilter: (todolistId: string, filter: FilterValues) => void
@@ -64,7 +64,7 @@ export const TodolistItem = (props: Props) => {
         </div>
         <CreateItemForm onCreateItem={createTaskHandler}/>
         {tasks.length === 0 ? (
-            <p>There are no tasks</p>
+            <p>Тасок нет</p>
         ) : (
             <List>
               {tasks.map(task => {
